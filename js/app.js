@@ -57,6 +57,8 @@ var firstAndPike = {
     ulElem.appendChild(totalElem);
     document.body.appendChild(ulElem);
   }
+
+  
 };
 
 /**
@@ -101,6 +103,7 @@ var seatacAirport = {
     this.calculateCookies();
     this.calculateTotalSale();
 
+    var divEl = document.getElementById('storeSales');
     var elem = document.createElement('h2').textContent = this.storeName;
     document.write(elem);
     //List sales
@@ -115,7 +118,7 @@ var seatacAirport = {
     var totalElem = document.createElement('li');
     totalElem.textContent = `Total:${this.totalSale} cookies`;
     ulElem.appendChild(totalElem);
-    document.body.appendChild(ulElem);
+    divEl.appendChild(ulElem);
   }
 };
 
@@ -276,7 +279,12 @@ var alki = {
     this.initializeCustomers();
     this.calculateCookies();
     this.calculateTotalSale();
+    this.render();
 
+   
+  },
+
+  render: function(){
     var elem = document.createElement('h2').textContent = this.storeName;
     document.write(elem);
     //List sales
