@@ -41,10 +41,13 @@ var firstAndPike = {
     this.calculateCookies();
     this.calculateTotalSale();
 
-    var elem = document.createElement('h2').textContent = this.storeName;
-    document.write(elem);
+    //div
+    var divEl = document.getElementById('storeSales');
+
+    
     //List sales
     var ulElem = document.createElement('ul');
+    ulElem.textContent = this.storeName;
 
     for(var index = 0; index < hours.length; index++){
       var liElem = document.createElement('li');
@@ -55,15 +58,17 @@ var firstAndPike = {
     var totalElem = document.createElement('li');
     totalElem.textContent = `Total:${this.totalSale} cookies`;
     ulElem.appendChild(totalElem);
-    document.body.appendChild(ulElem);
+
+    // divEl.appendChild(elem);
+    divEl.appendChild(ulElem);
   }
 
   
 };
 
-/**
- *  SeaTac Airport
- */
+// /**
+//  *  SeaTac Airport
+//  */
 
 
 var seatacAirport = {
@@ -103,11 +108,13 @@ var seatacAirport = {
     this.calculateCookies();
     this.calculateTotalSale();
 
+    //div
     var divEl = document.getElementById('storeSales');
-    var elem = document.createElement('h2').textContent = this.storeName;
-    document.write(elem);
+
+    
     //List sales
     var ulElem = document.createElement('ul');
+    ulElem.textContent = this.storeName;
 
     for(var index = 0; index < hours.length; index++){
       var liElem = document.createElement('li');
@@ -118,13 +125,15 @@ var seatacAirport = {
     var totalElem = document.createElement('li');
     totalElem.textContent = `Total:${this.totalSale} cookies`;
     ulElem.appendChild(totalElem);
+
+    // divEl.appendChild(elem);
     divEl.appendChild(ulElem);
   }
 };
 
-/*
-Seattle Center
-*/
+// /*
+// Seattle Center
+// */
 
 var seattleCenter = {
   storeName: 'Seattle Center',
@@ -163,10 +172,13 @@ var seattleCenter = {
     this.calculateCookies();
     this.calculateTotalSale();
 
-    var elem = document.createElement('h2').textContent = this.storeName;
-    document.write(elem);
+    //div
+    var divEl = document.getElementById('storeSales');
+
+    
     //List sales
     var ulElem = document.createElement('ul');
+    ulElem.textContent = this.storeName;
 
     for(var index = 0; index < hours.length; index++){
       var liElem = document.createElement('li');
@@ -177,13 +189,15 @@ var seattleCenter = {
     var totalElem = document.createElement('li');
     totalElem.textContent = `Total:${this.totalSale} cookies`;
     ulElem.appendChild(totalElem);
-    document.body.appendChild(ulElem);
+
+    // divEl.appendChild(elem);
+    divEl.appendChild(ulElem);
   }
 };
 
-/*
-Capitol Hill
-*/
+// /*
+// Capitol Hill
+// */
 
 var capitolHill = {
   storeName: 'Capitol Hill',
@@ -222,10 +236,13 @@ var capitolHill = {
     this.calculateCookies();
     this.calculateTotalSale();
 
-    var elem = document.createElement('h2').textContent = this.storeName;
-    document.write(elem);
+    //div
+    var divEl = document.getElementById('storeSales');
+
+    
     //List sales
     var ulElem = document.createElement('ul');
+    ulElem.textContent = this.storeName;
 
     for(var index = 0; index < hours.length; index++){
       var liElem = document.createElement('li');
@@ -236,13 +253,15 @@ var capitolHill = {
     var totalElem = document.createElement('li');
     totalElem.textContent = `Total:${this.totalSale} cookies`;
     ulElem.appendChild(totalElem);
-    document.body.appendChild(ulElem);
+
+    // divEl.appendChild(elem);
+    divEl.appendChild(ulElem);
   }
 };
 
-/**
- * Alki
- */
+// /**
+//  * Alki
+//  */
 var alki = {
   storeName: 'Alki',
   storeHours: 15,
@@ -279,16 +298,14 @@ var alki = {
     this.initializeCustomers();
     this.calculateCookies();
     this.calculateTotalSale();
-    this.render();
 
-   
-  },
+    //div
+    var divEl = document.getElementById('storeSales');
 
-  render: function(){
-    var elem = document.createElement('h2').textContent = this.storeName;
-    document.write(elem);
+    
     //List sales
     var ulElem = document.createElement('ul');
+    ulElem.textContent = this.storeName;
 
     for(var index = 0; index < hours.length; index++){
       var liElem = document.createElement('li');
@@ -299,7 +316,9 @@ var alki = {
     var totalElem = document.createElement('li');
     totalElem.textContent = `Total:${this.totalSale} cookies`;
     ulElem.appendChild(totalElem);
-    document.body.appendChild(ulElem);
+
+    // divEl.appendChild(elem);
+    divEl.appendChild(ulElem);
   }
 };
 
