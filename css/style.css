@@ -94,3 +94,7 @@ th, td {
 th{
   background-color: lightseagreen;
 }
+
+#storeSales{
+  overflow: auto;
+}
