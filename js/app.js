@@ -9,6 +9,8 @@ var allStores = [];
 
 //sale totals per hour
 var hourlyTotal = [];
+//table 
+var tableElem;
 
 //Constructor for store location
 function StoreLocationSales(name, storeTimeLength, minCust, maxCust, avgCookies){
@@ -186,36 +188,41 @@ function makeTotalRow(tableElement){
   tableElement.append(makeTableRow('Totals', hourlyTotal, getSum(hourlyTotal) ));
 }
 
+function pageLoad(){
+  //initialize hours
+  initializeHours();
+
+  // create store locations
+  new StoreLocationSales('1st and Pike', timeLength, 23, 65, 6.3);
+  new StoreLocationSales('SeaTac Airport', timeLength, 3, 24, 1.2);
+  new StoreLocationSales('Seattle Center', timeLength, 11, 38, 3.7);
+  new StoreLocationSales('Capitol Hill', timeLength, 20, 38, 2.3);
+  new StoreLocationSales('Alki', timeLength, 2, 16, 4.6);
+
+  //Calculate sales per location
+  processDailySales();
+
+
+  //Display information to page using table
+
+  var divEl = document.getElementById('storeSales');
+  tableElem = initializeTable();
+
+  //Render all store location data
+  renderAllDailySales();
+
+  makeTotalRow(tableElem);
+
+  //display the store location
+  divEl.append(tableElem);
+}
+
 
 /*******************
  *  FUNCTION CALLS
  *
  *******************/
 
-//initialize hours
-initializeHours();
-
-// create store locations
-new StoreLocationSales('1st and Pike', timeLength, 23, 65, 6.3);
-new StoreLocationSales('SeaTac Airport', timeLength, 3, 24, 1.2);
-new StoreLocationSales('Seattle Center', timeLength, 11, 38, 3.7);
-new StoreLocationSales('Capitol Hill', timeLength, 20, 38, 2.3);
-new StoreLocationSales('Alki', timeLength, 2, 16, 4.6);
-
-//Calculate sales per location
-processDailySales();
-
-
-//Display information to page using table
-
-var divEl = document.getElementById('storeSales');
-var tableElem = initializeTable();
-
-//Render all store location data
-renderAllDailySales();
-
-makeTotalRow(tableElem);
-
-//display the store location
-divEl.append(tableElem);
+//Initial loading of page
+pageLoad();
 
