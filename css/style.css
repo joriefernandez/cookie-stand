@@ -104,20 +104,19 @@ input {
   border-radius: 8px;
   padding: 5px 5px 5px 5px;
   margin: 15px;
-  /*display: block;*/
+  
 }
 
 label {
   color: black;
-  /*display: block;*/
+  
 }
 
 fieldset {
-  max-width: 900px;
+  max-width: 840px;
   border: 7px solid teal;
-  /* border-radius: 75px; */
   padding: 10px;
-  text-align: center;
+  text-align: start;
 }
 
 legend {
@@ -132,14 +131,18 @@ legend {
 }
 
 button {
-  color: #73094c;
-  text-shadow: 0px 1px 1px #ffffff;
+  color: teal;
+  text-shadow: 0px 2px 2px #ffffff;
   border: 2px solid #b2b2b2;
+  height: 35px;
+  float: right;
+  font: bold 12px arial, sans-serif;
   background-color: #73094c;
   background: -webkit-gradient(linear, left top, left bottom, from(#F0E8C7), to(#9C9060));
   background: -moz-linear-gradient(top, #F0E8C7, #9C9060);
   background: -o-linear-gradient(top, #F0E8C7, #9C9060);
   background: -ms-linear-gradient(top, #F0E8C7, #9C9060);
+  
 }
 
 button:hover {
@@ -150,4 +153,8 @@ button:hover {
   background: -moz-linear-gradient(top, #F0E8C7, #9C9000);
   background: -o-linear-gradient(top, #F0E8C7, #9C9000);
   background: -ms-linear-gradient(top, #F0E8C7, #9C9000);
+}
+
+form{
+  text-align: center;
 }

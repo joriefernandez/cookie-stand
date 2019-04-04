@@ -280,7 +280,7 @@ function handleLocationSubmit(event){
     event.target.maxCustInput.value = null;
     return alert('Minimum number should be lesser than the maximum number!');
   }
-  
+
 
   var newAvgCookies = event.target.avgCookiesInput.value;
   console.log(newAvgCookies);
@@ -289,7 +289,7 @@ function handleLocationSubmit(event){
 
   //Push to the array locations
   processDailySales(newStoreSales);
-  
+
   //reset input fields
   locationForm.reset();
   //create table with the added value
