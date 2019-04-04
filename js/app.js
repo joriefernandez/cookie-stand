@@ -9,12 +9,20 @@ var allStores = [];
 
 //sale totals per hour
 var hourlyTotal = [];
+//table
+var tableElem;
+
+//form
+var locationForm = document.getElementById('newLocation');
+
+//div
+var divEl;
 
 //Constructor for store location
 function StoreLocationSales(name, storeTimeLength, minCust, maxCust, avgCookies){
   this.storeName = name;
-  this.minCustomer = maxCust;
-  this.maxCustomer = avgCookies;
+  this.minCustomer = minCust;
+  this.maxCustomer = maxCust;
   this.avgCookiesPerCust = avgCookies;
   this.customers = [];
   this.cookies = [];
@@ -133,18 +141,23 @@ function initializeTable(){
 }
 
 //Function to process store locations
-function processDailySales(){
+function processAllDailySales(){
   for (var index = 0; index < allStores.length; index++){
-    allStores[index].initializeCustomers();
-    allStores[index].calculateCookies();
-    allStores[index].calculateTotalSale();
-
+    processDailySales(allStores[index]);
   }
 
 }
 
+//Function to remove store sales
+function removeStoreSales(){
+  divEl.innerHTML = '';
+}
+
 //Function to render all store location sales
 function renderAllDailySales(){
+
+  removeStoreSales();
+
   for (var index = 0; index < allStores.length; index++){
     allStores[index].render(tableElem);
   }
@@ -186,36 +199,116 @@ function makeTotalRow(tableElement){
   tableElement.append(makeTableRow('Totals', hourlyTotal, getSum(hourlyTotal) ));
 }
 
+//Function to process daily sale of a store
+function processDailySales(currentStore){
+  currentStore.initializeCustomers();
+  currentStore.calculateCookies();
+  currentStore.calculateTotalSale();
+
+
+}
+
+//function to create table
+function createTable(){
+//Display information to page using table
+
+  divEl = document.getElementById('storeSales');
+  tableElem = initializeTable();
+
+  //Render all store location data
+  renderAllDailySales();
+
+  makeTotalRow(tableElem);
+
+  //display the store location
+  divEl.append(tableElem);
+}
+
+function pageLoad(){
+  //initialize hours
+  initializeHours();
+
+  // create store locations
+  new StoreLocationSales('1st and Pike', timeLength, 23, 65, 6.3);
+  new StoreLocationSales('SeaTac Airport', timeLength, 3, 24, 1.2);
+  new StoreLocationSales('Seattle Center', timeLength, 11, 38, 3.7);
+  new StoreLocationSales('Capitol Hill', timeLength, 20, 38, 2.3);
+  new StoreLocationSales('Alki', timeLength, 2, 16, 4.6);
+
+  //Calculate sales per location
+  processAllDailySales();
+
+  //create initial table
+  createTable();
+}
+
+// Function to validate store name
+function isValidName(name){
+  for (var i = 0; i < allStores.length; i++){
+    if(allStores[i].storeName.toUpperCase() === name.toUpperCase()){
+      return false;
+    }
+  }
+  return true;
+}
+
+//Function to validate min and max number
+function isValidRange(minNum, maxNum){
+  return (minNum < maxNum);
+}
+
+//Function for the Submit Event
+function handleLocationSubmit(event){
+
+  console.log('Submit button is clicked');
+  event.preventDefault();
+
+  var newStore = event.target.locationInput.value;
+  //validate new store name
+  if(!isValidName(newStore)){
+    event.target.locationInput.value = null;
+    return alert('Store location already exists!');
+  }
+
+  var newMinCust = event.target.minCustInput.value;
+  
+  var newMaxCust = event.target.maxCustInput.value;
+  
+  //validate min and max
+  if (!isValidRange(newMinCust, newMaxCust)){
+    event.target.minCustInput.value = null;
+    event.target.maxCustInput.value = null;
+    return alert('Minimum number should be lesser than the maximum number!');
+  }
+
+
+  var newAvgCookies = event.target.avgCookiesInput.value;
+  console.log(newAvgCookies);
+  //New Store Location
+  var newStoreSales  = new StoreLocationSales(newStore, timeLength, newMinCust, newMaxCust, newAvgCookies);
+
+  //Push to the array locations
+  processDailySales(newStoreSales);
+
+  //reset input fields
+  locationForm.reset();
+  //create table with the added value
+  createTable();
+}
+
 
 /*******************
  *  FUNCTION CALLS
  *
  *******************/
 
-//initialize hours
-initializeHours();
+//Initial loading of page
+pageLoad();
 
-// create store locations
-new StoreLocationSales('1st and Pike', timeLength, 23, 65, 6.3);
-new StoreLocationSales('SeaTac Airport', timeLength, 3, 24, 1.2);
-new StoreLocationSales('Seattle Center', timeLength, 11, 38, 3.7);
-new StoreLocationSales('Capitol Hill', timeLength, 20, 38, 2.3);
-new StoreLocationSales('Alki', timeLength, 2, 16, 4.6);
-
-//Calculate sales per location
-processDailySales();
+//add listener to location form
+locationForm.addEventListener('submit', handleLocationSubmit);
 
 
-//Display information to page using table
 
-var divEl = document.getElementById('storeSales');
-var tableElem = initializeTable();
 
-//Render all store location data
-renderAllDailySales();
-
-makeTotalRow(tableElem);
-
-//display the store location
-divEl.append(tableElem);
 
