@@ -9,14 +9,20 @@ var allStores = [];
 
 //sale totals per hour
 var hourlyTotal = [];
-//table 
+//table
 var tableElem;
+
+//form
+var locationForm = document.getElementById('newLocation');
+
+//div
+var divEl;
 
 //Constructor for store location
 function StoreLocationSales(name, storeTimeLength, minCust, maxCust, avgCookies){
   this.storeName = name;
-  this.minCustomer = maxCust;
-  this.maxCustomer = avgCookies;
+  this.minCustomer = minCust;
+  this.maxCustomer = maxCust;
   this.avgCookiesPerCust = avgCookies;
   this.customers = [];
   this.cookies = [];
@@ -135,18 +141,23 @@ function initializeTable(){
 }
 
 //Function to process store locations
-function processDailySales(){
+function processAllDailySales(){
   for (var index = 0; index < allStores.length; index++){
-    allStores[index].initializeCustomers();
-    allStores[index].calculateCookies();
-    allStores[index].calculateTotalSale();
-
+    processDailySales(allStores[index]);
   }
 
 }
 
+//Function to remove store sales
+function removeStoreSales(){
+  divEl.innerHTML = '';
+}
+
 //Function to render all store location sales
 function renderAllDailySales(){
+
+  removeStoreSales();
+
   for (var index = 0; index < allStores.length; index++){
     allStores[index].render(tableElem);
   }
@@ -188,6 +199,31 @@ function makeTotalRow(tableElement){
   tableElement.append(makeTableRow('Totals', hourlyTotal, getSum(hourlyTotal) ));
 }
 
+//Function to process daily sale of a store
+function processDailySales(currentStore){
+  currentStore.initializeCustomers();
+  currentStore.calculateCookies();
+  currentStore.calculateTotalSale();
+
+
+}
+
+//function to create table
+function createTable(){
+//Display information to page using table
+
+  divEl = document.getElementById('storeSales');
+  tableElem = initializeTable();
+
+  //Render all store location data
+  renderAllDailySales();
+
+  makeTotalRow(tableElem);
+
+  //display the store location
+  divEl.append(tableElem);
+}
+
 function pageLoad(){
   //initialize hours
   initializeHours();
@@ -200,21 +236,40 @@ function pageLoad(){
   new StoreLocationSales('Alki', timeLength, 2, 16, 4.6);
 
   //Calculate sales per location
-  processDailySales();
+  processAllDailySales();
+
+  //create initial table
+  createTable();
+
+}
 
 
-  //Display information to page using table
+//Function for the Submit Event
+function handleLocationSubmit(event){
 
-  var divEl = document.getElementById('storeSales');
-  tableElem = initializeTable();
+  console.log('Submit button is clicked');
+  event.preventDefault();
 
-  //Render all store location data
-  renderAllDailySales();
+  var newStore = event.target.locationInput.value;
+  console.log('Location name', newStore);
 
-  makeTotalRow(tableElem);
+  var newMinCust = event.target.minCustInput.value;
+  console.log(newMinCust);
+  var newMaxCust = event.target.maxCustInput.value;
+  console.log(newMaxCust);
+  var newAvgCookies = event.target.avgCookiesInput.value;
+  console.log(newAvgCookies);
+  //New Store Location
+  var newStoreSales  = new StoreLocationSales(newStore, timeLength, newMinCust, newMaxCust, newAvgCookies);
+  console.log(newStoreSales);
 
-  //display the store location
-  divEl.append(tableElem);
+  //Push to the array locations
+  processDailySales(newStoreSales);
+  console.log(newStoreSales);
+  //reset input fields
+  locationForm.reset();
+
+  createTable();
 }
 
 
@@ -225,4 +280,11 @@ function pageLoad(){
 
 //Initial loading of page
 pageLoad();
+
+//add listener to location form
+locationForm.addEventListener('submit', handleLocationSubmit);
+
+
+
+
 
