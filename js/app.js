@@ -240,9 +240,22 @@ function pageLoad(){
 
   //create initial table
   createTable();
-
 }
 
+// Function to validate store name
+function isValidName(name){
+  for (var i = 0; i < allStores.length; i++){
+    if(allStores[i].storeName.toUpperCase() === name.toUpperCase()){
+      return false;
+    }
+  }
+  return true;
+}
+
+//Function to validate min and max number
+function isValidRange(minNum, maxNum){
+  return (minNum < maxNum);
+}
 
 //Function for the Submit Event
 function handleLocationSubmit(event){
@@ -251,24 +264,35 @@ function handleLocationSubmit(event){
   event.preventDefault();
 
   var newStore = event.target.locationInput.value;
-  console.log('Location name', newStore);
+  //validate new store name
+  if(!isValidName(newStore)){
+    event.target.locationInput.value = null;
+    return alert('Store location already exists!');
+  }
 
   var newMinCust = event.target.minCustInput.value;
-  console.log(newMinCust);
+  
   var newMaxCust = event.target.maxCustInput.value;
-  console.log(newMaxCust);
+  
+  //validate min and max
+  if (!isValidRange(newMinCust, newMaxCust)){
+    event.target.minCustInput.value = null;
+    event.target.maxCustInput.value = null;
+    return alert('Minimum number should be lesser than the maximum number!');
+  }
+  
+
   var newAvgCookies = event.target.avgCookiesInput.value;
   console.log(newAvgCookies);
   //New Store Location
   var newStoreSales  = new StoreLocationSales(newStore, timeLength, newMinCust, newMaxCust, newAvgCookies);
-  console.log(newStoreSales);
 
   //Push to the array locations
   processDailySales(newStoreSales);
-  console.log(newStoreSales);
+  
   //reset input fields
   locationForm.reset();
-
+  //create table with the added value
   createTable();
 }
 
