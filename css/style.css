@@ -106,8 +106,16 @@ p{
   width: 320px;
   height: 280px;
   float: left;
-  margin
+  
+}
 
+#location{
+  clear: left;
+}
+
+#location p{
+  margin-bottom: 30px;
+  
 }
 
 
@@ -270,4 +278,11 @@ button:hover {
 
 form{
   text-align: center;
+  margin: 30px auto;
+  width: 840px;
+}
+
+#storeSales{
+  width: 960px;
+  margin: 30px auto;
 }
