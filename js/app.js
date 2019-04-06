@@ -271,9 +271,9 @@ function handleLocationSubmit(event){
   }
 
   var newMinCust = event.target.minCustInput.value;
-  
+
   var newMaxCust = event.target.maxCustInput.value;
-  
+
   //validate min and max
   if (!isValidRange(newMinCust, newMaxCust)){
     event.target.minCustInput.value = null;
