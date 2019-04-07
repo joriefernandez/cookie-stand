@@ -203,17 +203,21 @@ h2{
 table {
   border-collapse: collapse; 
   width: 100%;
+  font-family: Helvetica, sans-serif;
+  font-size: 8px;
+  color: blue;
 }
 
-th, td {
+/* th, td {
   text-align: center;
   padding: 8px;
   border: 1px solid black;
   background: white;
-}
+} */
 
 th{
   background-color: lightseagreen;
+  font-weight: bold;
 }
 
 #storeSales{
@@ -230,11 +234,11 @@ input {
 
 label {
   color: black;
-  
+ 
 }
 
 fieldset {
-  max-width: 840px;
+  max-width: 858px;
   border: 7px solid teal;
   padding: 10px;
   text-align: start;
@@ -279,10 +283,26 @@ button:hover {
 form{
   text-align: center;
   margin: 30px auto;
-  width: 840px;
+  width: 960px;
+  font-family: Helvetica, sans-serif
 }
 
 #storeSales{
-  width: 960px;
+  width: 1065px;
   margin: 30px auto;
+}
+
+
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: center;
+  padding: 8px;
+  color: blue;
+  font-size: 13px;
+}
+
+
+tr:nth-child(even) {
+  background-color: lightgray;
 }
